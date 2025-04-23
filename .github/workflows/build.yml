@@ -165,7 +165,8 @@ jobs:
     - name: Push packages to MyGet.org
       env:
         MYGET_API_KEY: ${{ secrets.MYGET_API_KEY }}
-      run: dotnet nuget push "*.nupkg" --api-key "${MYGET_API_KEY}" --skip-duplicate --source https://www.myget.org/F/openiddict/api/v3/index.json
+        MYGET_SOURCE: ${{ vars.MYGET_SOURCE }}
+      run: dotnet nuget push "*.nupkg" --api-key "${MYGET_API_KEY}" --skip-duplicate --source ${MYGET_SOURCE}
 
   push-packages-nuget:
     needs: [ build, validate-packages ]
